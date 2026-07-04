@@ -2,7 +2,7 @@
 
 A final-year engineering research project evaluating whether synthetic pedestrian imagery can improve **real-world pedestrian detection** performance when training an anchor-free YOLOv8n model.
 
-This repository is intentionally structured as a **research and reproducibility repository**, not a fake production codebase. It documents the experimental design, metrics, training commands, dataset setup, and limitations behind the project.
+This repository is structured as a research and reproducibility repository rather than a production deployment. It documents the experimental design, metrics, training commands, dataset setup, and limitations behind the project.
 
 ## Project summary
 
