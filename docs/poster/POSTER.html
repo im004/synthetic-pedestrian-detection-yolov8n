@@ -1,0 +1,1412 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FYP Poster – Synthetic Pedestrian Data for YOLOv8n</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #060f1e;
+        --surface: #0a1d38;
+        --card: #0d2248;
+        --cyan: #00d4ff;
+        --cyan-dim: rgba(0, 212, 255, 0.15);
+        --gold: #f59e0b;
+        --gold-dim: rgba(245, 158, 11, 0.15);
+        --green: #22c55e;
+        --red: #f87171;
+        --purple: #a78bfa;
+        --teal: #2dd4bf;
+        --text: #ffffff;
+        --text-sub: #7da9cc;
+        --border: rgba(0, 212, 255, 0.18);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #020a14;
+        font-family: "Inter", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        padding: 24px;
+      }
+
+      /* ===== POSTER CONTAINER ===== */
+      .poster {
+        width: 1060px;
+        background: var(--bg);
+        background-image:
+          radial-gradient(
+            ellipse at 15% 8%,
+            rgba(0, 180, 255, 0.07) 0%,
+            transparent 45%
+          ),
+          radial-gradient(
+            ellipse at 85% 92%,
+            rgba(0, 60, 180, 0.09) 0%,
+            transparent 45%
+          ),
+          radial-gradient(
+            ellipse at 50% 50%,
+            rgba(0, 30, 80, 0.5) 0%,
+            transparent 70%
+          );
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        box-shadow:
+          0 0 120px rgba(0, 0, 0, 0.9),
+          inset 0 0 60px rgba(0, 0, 40, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* ===== BANNER ===== */
+      .banner {
+        background: linear-gradient(
+          135deg,
+          #02070f 0%,
+          #071428 40%,
+          #061022 70%,
+          #02070f 100%
+        );
+        border-bottom: 3px solid var(--cyan);
+        padding: 20px 28px;
+        display: grid;
+        grid-template-columns: 170px 1fr 170px;
+        align-items: center;
+        gap: 16px;
+        position: relative;
+      }
+
+      .banner::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--cyan),
+          transparent
+        );
+      }
+
+      .brunel-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .brunel-name {
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--cyan);
+        letter-spacing: -0.3px;
+        line-height: 1.1;
+      }
+
+      .brunel-dept {
+        font-size: 9.5px;
+        font-weight: 400;
+        color: var(--text-sub);
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+
+      .banner-center {
+        text-align: center;
+      }
+
+      .banner-title {
+        font-family: "DM Serif Display", serif;
+        font-size: 17px;
+        color: var(--text);
+        line-height: 1.3;
+        letter-spacing: -0.2px;
+      }
+
+      .banner-title .highlight {
+        background: linear-gradient(90deg, var(--cyan), #60a5fa);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .banner-author {
+        margin-top: 8px;
+        font-size: 11px;
+        color: var(--text-sub);
+        font-weight: 400;
+      }
+
+      .banner-author strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .banner-right {
+        text-align: right;
+      }
+
+      .module-badge {
+        display: inline-block;
+        background: var(--cyan-dim);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 5px 10px;
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--cyan);
+        letter-spacing: 0.5px;
+      }
+
+      .degree-text {
+        margin-top: 6px;
+        font-size: 9.5px;
+        color: var(--text-sub);
+        line-height: 1.5;
+      }
+
+      /* ===== SECTION DIVIDERS ===== */
+      .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0;
+        min-height: 900px;
+      }
+
+      .col {
+        padding: 22px 20px;
+        border-right: 1px solid var(--border);
+      }
+
+      .col:last-child {
+        border-right: none;
+      }
+
+      .section-label {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--cyan);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .col-heading {
+        font-family: "DM Serif Display", serif;
+        font-size: 22px;
+        color: var(--text);
+        margin-bottom: 16px;
+        line-height: 1.2;
+      }
+
+      /* ===== PROBLEM COLUMN ===== */
+      .problem-bullets {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .problem-bullets li {
+        font-size: 12.5px;
+        color: var(--text);
+        line-height: 1.55;
+        padding-left: 16px;
+        position: relative;
+      }
+
+      .problem-bullets li::before {
+        content: "▶";
+        position: absolute;
+        left: 0;
+        color: var(--cyan);
+        font-size: 8px;
+        top: 4px;
+      }
+
+      .stat-callout {
+        background: linear-gradient(
+          135deg,
+          rgba(245, 158, 11, 0.12),
+          rgba(245, 158, 11, 0.04)
+        );
+        border: 1px solid rgba(245, 158, 11, 0.35);
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .stat-callout .stat-number {
+        font-size: 34px;
+        font-weight: 900;
+        color: var(--gold);
+        line-height: 1;
+      }
+
+      .stat-callout .stat-label {
+        font-size: 11px;
+        color: var(--text-sub);
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+
+      .aim-box {
+        background: var(--cyan-dim);
+        border: 1px solid rgba(0, 212, 255, 0.25);
+        border-radius: 10px;
+        padding: 14px 16px;
+      }
+
+      .aim-box .aim-header {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--cyan);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .aim-box p {
+        font-size: 12px;
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      /* ===== METHODOLOGY COLUMN ===== */
+      .condition-boxes {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .condition-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--card);
+        border-radius: 8px;
+        padding: 9px 12px;
+        border-left: 4px solid;
+        position: relative;
+      }
+
+      .condition-box.c1 {
+        border-color: #3b82f6;
+      }
+      .condition-box.c2 {
+        border-color: #6b7280;
+        opacity: 0.85;
+      }
+      .condition-box.c3 {
+        border-color: #8b5cf6;
+      }
+      .condition-box.c4 {
+        border-color: var(--gold);
+        background: rgba(245, 158, 11, 0.08);
+      }
+      .condition-box.c5 {
+        border-color: var(--teal);
+      }
+
+      .condition-num {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .c1 .condition-num {
+        background: rgba(59, 130, 246, 0.2);
+        color: #3b82f6;
+      }
+      .c2 .condition-num {
+        background: rgba(107, 114, 128, 0.2);
+        color: #9ca3af;
+      }
+      .c3 .condition-num {
+        background: rgba(139, 92, 246, 0.2);
+        color: #8b5cf6;
+      }
+      .c4 .condition-num {
+        background: rgba(245, 158, 11, 0.2);
+        color: var(--gold);
+      }
+      .c5 .condition-num {
+        background: rgba(45, 212, 191, 0.2);
+        color: var(--teal);
+      }
+
+      .condition-text {
+        flex: 1;
+      }
+
+      .condition-name {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.2;
+      }
+
+      .condition-desc {
+        font-size: 10.5px;
+        color: var(--text-sub);
+        margin-top: 2px;
+      }
+
+      .condition-result {
+        font-size: 13px;
+        font-weight: 800;
+        text-align: right;
+        flex-shrink: 0;
+      }
+
+      .c1 .condition-result {
+        color: #3b82f6;
+      }
+      .c2 .condition-result {
+        color: #9ca3af;
+      }
+      .c3 .condition-result {
+        color: #8b5cf6;
+      }
+      .c4 .condition-result {
+        color: var(--gold);
+      }
+      .c5 .condition-result {
+        color: var(--teal);
+      }
+
+      .winner-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--gold);
+        color: #000;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        padding: 2px 7px;
+        border-radius: 10px;
+      }
+
+      .dataset-info {
+        background: var(--surface);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+      }
+
+      .dataset-info-title {
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--text-sub);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+
+      .dataset-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .dataset-row:last-child {
+        border-bottom: none;
+      }
+
+      .dataset-row .label {
+        font-size: 11px;
+        color: var(--text-sub);
+      }
+
+      .dataset-row .value {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      /* ===== RESULTS COLUMN ===== */
+      .bar-chart-container {
+        margin-bottom: 18px;
+      }
+
+      .bar-chart-svg {
+        width: 100%;
+        overflow: visible;
+      }
+
+      .results-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 18px;
+        font-size: 11.5px;
+      }
+
+      .results-table th {
+        background: var(--surface);
+        color: var(--text-sub);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        padding: 7px 10px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .results-table td {
+        padding: 7px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        color: var(--text);
+      }
+
+      .results-table tr.winner td {
+        background: rgba(245, 158, 11, 0.08);
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      .results-table .pos {
+        color: var(--green);
+        font-weight: 600;
+      }
+      .results-table .neg {
+        color: var(--red);
+        font-weight: 600;
+      }
+
+      .finding-box {
+        background: linear-gradient(
+          135deg,
+          rgba(0, 212, 255, 0.08),
+          rgba(0, 90, 200, 0.05)
+        );
+        border: 1px solid rgba(0, 212, 255, 0.3);
+        border-radius: 10px;
+        padding: 14px 16px;
+      }
+
+      .finding-label {
+        font-size: 9px;
+        font-weight: 700;
+        color: var(--cyan);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+      }
+
+      .finding-text {
+        font-size: 12px;
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      .finding-text strong {
+        color: var(--gold);
+      }
+
+      /* ===== FOOTER ===== */
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        border-top: 2px solid var(--border);
+        min-height: 200px;
+      }
+
+      .footer-col {
+        padding: 18px 20px;
+        border-right: 1px solid var(--border);
+      }
+
+      .footer-col:last-child {
+        border-right: none;
+      }
+
+      .footer-heading {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--cyan);
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .footer-heading .icon {
+        font-size: 14px;
+      }
+
+      .footer-bullets {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .footer-bullets li {
+        font-size: 11.5px;
+        color: var(--text);
+        line-height: 1.55;
+        padding-left: 14px;
+        position: relative;
+      }
+
+      .footer-bullets li::before {
+        content: "▪";
+        position: absolute;
+        left: 0;
+        color: var(--cyan);
+        font-size: 10px;
+      }
+
+      .footer-bullets li.negative::before {
+        color: var(--red);
+      }
+      .footer-bullets li.positive::before {
+        color: var(--green);
+      }
+
+      /* ===== PRINT STYLES ===== */
+      @media print {
+        body {
+          background: none;
+          padding: 0;
+        }
+        .poster {
+          width: 100%;
+          box-shadow: none;
+          border: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="poster">
+      <!-- ===== BANNER ===== -->
+      <div class="banner">
+        <div class="brunel-logo">
+          <div class="brunel-name">BRUNEL<br />UNIVERSITY<br />LONDON</div>
+          <div class="brunel-dept">
+            College of Engineering,<br />Design & Physical Sciences<br />Dept.
+            of Engineering
+          </div>
+        </div>
+
+        <div class="banner-center">
+          <div class="banner-title">
+            How Effective Is
+            <span class="highlight">Synthetic Pedestrian Data</span><br />
+            for Improving Deep Learning Detection Models —<br />
+            and Does the
+            <span class="highlight">Integration Strategy</span> Matter?
+          </div>
+          <div class="banner-author">
+            <strong> Imran Mohamed</strong> &nbsp;|&nbsp; BEng Electronic &amp;
+            Electrical Engineering &nbsp;|&nbsp; April 2026 &nbsp;|&nbsp;
+            Supervisor: Md Nazmul Huda
+          </div>
+        </div>
+
+        <div class="banner-right">
+          <div class="module-badge">EE3636</div>
+          <div class="degree-text">
+            YOLOv8n · SYNTHIA-PANO · CARLA<br />
+            Python 3.9 · PyTorch 2.8 · Apple M2
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== MAIN GRID ===== -->
+      <div class="main-grid">
+        <!-- COLUMN 1: Problem & Aim -->
+        <div class="col">
+          <div class="section-label">01 — Problem</div>
+          <div class="col-heading">Why Synthetic<br />Data?</div>
+
+          <ul class="problem-bullets">
+            <li>
+              Pedestrian detection fails in the conditions that matter most —
+              occlusion, low-light, rare poses, crowd interactions
+            </li>
+            <li>
+              Real training data is expensive, privacy-regulated, and cannot
+              capture rare safety-critical events
+            </li>
+            <li>
+              Synthetic simulation generates automatic, precise annotations with
+              full scene control
+            </li>
+            <li>
+              But a <strong>synthetic-to-real domain gap</strong> limits direct
+              usefulness — texture, lighting, and occlusion differ fundamentally
+              from the real world
+            </li>
+          </ul>
+
+          <div class="stat-callout">
+            <div class="stat-number">385</div>
+            <div class="stat-label">
+              UK pedestrian road deaths in 2022<br />≈ 20% of all road
+              fatalities<br /><small style="opacity: 0.7">(DfT, 2022)</small>
+            </div>
+          </div>
+
+          <div class="section-label" style="margin-top: 4px">
+            02 — Research Gap
+          </div>
+          <ul class="problem-bullets">
+            <li>
+              Prior work dominated by Faster R-CNN;
+              <strong>YOLOv8n anchor-free architecture untested</strong> in
+              synthetic-to-real transfer
+            </li>
+            <li>
+              Does the integration mechanism — not just the data — determine the
+              outcome?
+            </li>
+          </ul>
+
+          <div style="margin-top: 14px">
+            <div class="aim-box">
+              <div class="aim-header">🎯 Research Aim</div>
+              <p>
+                Determine whether synthetic pedestrian data improves YOLOv8n
+                real-world performance, and identify which integration strategy
+                is most effective under realistic CPU constraints.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMN 2: Methodology -->
+        <div class="col">
+          <div class="section-label">03 — Methodology</div>
+          <div class="col-heading">Five Controlled<br />Conditions</div>
+
+          <p
+            style="
+              font-size: 11.5px;
+              color: var(--text-sub);
+              margin-bottom: 14px;
+            "
+          >
+            All conditions share: YOLOv8n · 50 epochs · Identical augmentation
+            pipeline · Fixed real validation split (441 images, 2,705 GT
+            instances)
+          </p>
+
+          <div class="condition-boxes">
+            <div class="condition-box c1">
+              <div class="condition-num">1</div>
+              <div class="condition-text">
+                <div class="condition-name">Real-Only Baseline</div>
+                <div class="condition-desc">
+                  2,500 real urban images · 50 epochs
+                </div>
+              </div>
+              <div class="condition-result">0.591</div>
+            </div>
+
+            <div class="condition-box c2">
+              <div class="condition-num">2</div>
+              <div class="condition-text">
+                <div class="condition-name">Synthetic-Only Test</div>
+                <div class="condition-desc">
+                  3,836 SYNTHIA+CARLA · 50 epochs
+                </div>
+              </div>
+              <div class="condition-result">0.220</div>
+            </div>
+
+            <div class="condition-box c3">
+              <div class="condition-num">3</div>
+              <div class="condition-text">
+                <div class="condition-name">50/50 Balanced Mix</div>
+                <div class="condition-desc">
+                  2,500 real + 2,500 synthetic · 50 epochs
+                </div>
+              </div>
+              <div class="condition-result">0.652</div>
+            </div>
+
+            <div class="condition-box c4" style="position: relative">
+              <span class="winner-badge">★ BEST</span>
+              <div class="condition-num">4</div>
+              <div class="condition-text">
+                <div class="condition-name" style="color: var(--gold)">
+                  70:30 Real-Dominated
+                </div>
+                <div class="condition-desc">
+                  2,500 real + 750 synthetic (30%) · 50 epochs
+                </div>
+              </div>
+              <div class="condition-result">0.666</div>
+            </div>
+
+            <div class="condition-box c5">
+              <div class="condition-num">5</div>
+              <div class="condition-text">
+                <div class="condition-name">
+                  Synth Pretrain → Real Fine-Tune
+                </div>
+                <div class="condition-desc">
+                  Stage 1: 50ep synthetic · Stage 2: 50ep real
+                </div>
+              </div>
+              <div class="condition-result">0.659</div>
+            </div>
+          </div>
+
+          <div class="dataset-info">
+            <div class="dataset-info-title">Datasets &amp; Architecture</div>
+            <div class="dataset-row">
+              <span class="label">Real corpus</span>
+              <span class="value">2,500 train · 441 val (YOLO format)</span>
+            </div>
+            <div class="dataset-row">
+              <span class="label">Synthetic</span>
+              <span class="value">SYNTHIA-PANO (2,826) + CARLA (1,010)</span>
+            </div>
+            <div class="dataset-row">
+              <span class="label">Model</span>
+              <span class="value"
+                >YOLOv8n · 3.01M params · COCO-pretrained</span
+              >
+            </div>
+            <div class="dataset-row">
+              <span class="label">Preprocessing</span>
+              <span class="value"
+                >Small-object filter (&lt;150px²) · symlinks</span
+              >
+            </div>
+            <div class="dataset-row">
+              <span class="label">Platform</span>
+              <span class="value">Apple M2 CPU · Python 3.9 · PyTorch 2.8</span>
+            </div>
+          </div>
+
+          <div
+            style="
+              background: var(--surface);
+              border-radius: 8px;
+              padding: 10px 14px;
+              font-size: 11px;
+              color: var(--text-sub);
+              line-height: 1.5;
+            "
+          >
+            <strong style="color: var(--text)">Evaluation metrics:</strong>
+            Precision · Recall · mAP50 · mAP50-95<br />
+            <em
+              >Validation set held constant and unaugmented across all
+              conditions</em
+            >
+          </div>
+        </div>
+
+        <!-- COLUMN 3: Key Results -->
+        <div class="col">
+          <div class="section-label">04 — Key Results</div>
+          <div class="col-heading">mAP50 Across<br />All Conditions</div>
+
+          <!-- BAR CHART (SVG) -->
+          <div class="bar-chart-container">
+            <svg
+              class="bar-chart-svg"
+              viewBox="0 0 310 170"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <!-- Background grid lines -->
+              <line
+                x1="40"
+                y1="10"
+                x2="310"
+                y2="10"
+                stroke="rgba(255,255,255,0.06)"
+                stroke-width="1"
+              />
+              <line
+                x1="40"
+                y1="44"
+                x2="310"
+                y2="44"
+                stroke="rgba(255,255,255,0.06)"
+                stroke-width="1"
+              />
+              <line
+                x1="40"
+                y1="78"
+                x2="310"
+                y2="78"
+                stroke="rgba(255,255,255,0.06)"
+                stroke-width="1"
+              />
+              <line
+                x1="40"
+                y1="112"
+                x2="310"
+                y2="112"
+                stroke="rgba(255,255,255,0.06)"
+                stroke-width="1"
+              />
+              <line
+                x1="40"
+                y1="145"
+                x2="310"
+                y2="145"
+                stroke="rgba(255,255,255,0.1)"
+                stroke-width="1"
+              />
+
+              <!-- Y-axis labels -->
+              <text
+                x="35"
+                y="148"
+                text-anchor="end"
+                fill="#7da9cc"
+                font-size="8"
+                font-family="Inter"
+              >
+                0.0
+              </text>
+              <text
+                x="35"
+                y="115"
+                text-anchor="end"
+                fill="#7da9cc"
+                font-size="8"
+                font-family="Inter"
+              >
+                0.2
+              </text>
+              <text
+                x="35"
+                y="81"
+                text-anchor="end"
+                fill="#7da9cc"
+                font-size="8"
+                font-family="Inter"
+              >
+                0.4
+              </text>
+              <text
+                x="35"
+                y="47"
+                text-anchor="end"
+                fill="#7da9cc"
+                font-size="8"
+                font-family="Inter"
+              >
+                0.6
+              </text>
+              <text
+                x="35"
+                y="13"
+                text-anchor="end"
+                fill="#7da9cc"
+                font-size="8"
+                font-family="Inter"
+              >
+                0.8
+              </text>
+
+              <!-- Y axis line -->
+              <line
+                x1="40"
+                y1="10"
+                x2="40"
+                y2="145"
+                stroke="rgba(255,255,255,0.15)"
+                stroke-width="1"
+              />
+
+              <!-- Bars: chart height = 135px (y from 145 down to 10)
+                         Scale: 0.8 maps to y=10, 0.0 maps to y=145
+                         height = value / 0.8 * 135
+                         C1: 0.591 → height = 99.7, y = 145 - 99.7 = 45.3
+                         C2: 0.220 → height = 37.1, y = 145 - 37.1 = 107.9
+                         C3: 0.652 → height = 109.9, y = 145 - 109.9 = 35.1
+                         C4: 0.666 → height = 112.2, y = 145 - 112.2 = 32.8
+                         C5: 0.659 → height = 111.1, y = 145 - 111.1 = 33.9
+                         
+                         Bar x positions (5 bars, 270px wide, each bar ~36px, gap ~18px):
+                         Bar width = 36px
+                         Group width = 36+18 = 54px
+                         Start x = 50
+                         C1: x=50, C2: x=104, C3: x=158, C4: x=212, C5: x=266
+                    -->
+
+              <!-- C1 - Real-only (blue) -->
+              <rect
+                x="50"
+                y="45"
+                width="36"
+                height="100"
+                rx="3"
+                fill="url(#gradC1)"
+                opacity="0.9"
+              />
+              <text
+                x="68"
+                y="40"
+                text-anchor="middle"
+                fill="#60a5fa"
+                font-size="9"
+                font-family="Inter"
+                font-weight="700"
+              >
+                0.591
+              </text>
+              <text
+                x="68"
+                y="158"
+                text-anchor="middle"
+                fill="#7da9cc"
+                font-size="8.5"
+                font-family="Inter"
+              >
+                C1
+              </text>
+              <text
+                x="68"
+                y="168"
+                text-anchor="middle"
+                fill="#7da9cc"
+                font-size="7"
+                font-family="Inter"
+              >
+                Real
+              </text>
+
+              <!-- C2 - Synth-only (gray/red) -->
+              <rect
+                x="104"
+                y="108"
+                width="36"
+                height="37"
+                rx="3"
+                fill="url(#gradC2)"
+                opacity="0.7"
+              />
+              <text
+                x="122"
+                y="103"
+                text-anchor="middle"
+                fill="#9ca3af"
+                font-size="9"
+                font-family="Inter"
+                font-weight="700"
+              >
+                0.220
+              </text>
+              <text
+                x="122"
+                y="158"
+                text-anchor="middle"
+                fill="#7da9cc"
+                font-size="8.5"
+                font-family="Inter"
+              >
+                C2
+              </text>
+              <text
+                x="122"
+                y="168"
+                text-anchor="middle"
+                fill="#7da9cc"
+                font-size="7"
+                font-family="Inter"
+              >
+                Synth
+              </text>
+
+              <!-- C3 - 50/50 (purple) -->
+              <rect
+                x="158"
+                y="35"
+                width="36"
+                height="110"
+                rx="3"
+                fill="url(#gradC3)"
+                opacity="0.9"
+              />
+              <text
+                x="176"
+                y="30"
+                text-anchor="middle"
+                fill="#a78bfa"
+                font-size="9"
+                font-family="Inter"
+                font-weight="700"
+              >
+                0.652
+              </text>
+              <text
+                x="176"
+                y="158"
+                text-anchor="middle"
+                fill="#7da9cc"
+                font-size="8.5"
+                font-family="Inter"
+              >
+                C3
+              </text>
+              <text
+                x="176"
+                y="168"
+                text-anchor="middle"
+                fill="#7da9cc"
+                font-size="7"
+                font-family="Inter"
+              >
+                50/50
+              </text>
+
+              <!-- C4 - 70:30 WINNER (gold, highlighted) -->
+              <rect
+                x="212"
+                y="32"
+                width="36"
+                height="113"
+                rx="3"
+                fill="url(#gradC4)"
+                opacity="1"
+              />
+              <!-- Glow effect -->
+              <rect
+                x="210"
+                y="30"
+                width="40"
+                height="117"
+                rx="4"
+                fill="none"
+                stroke="#f59e0b"
+                stroke-width="1.5"
+                opacity="0.5"
+              />
+              <text
+                x="230"
+                y="26"
+                text-anchor="middle"
+                fill="#f59e0b"
+                font-size="10"
+                font-family="Inter"
+                font-weight="900"
+              >
+                0.666
+              </text>
+              <text
+                x="230"
+                y="158"
+                text-anchor="middle"
+                fill="#f59e0b"
+                font-size="8.5"
+                font-family="Inter"
+                font-weight="700"
+              >
+                C4 ★
+              </text>
+              <text
+                x="230"
+                y="168"
+                text-anchor="middle"
+                fill="#f59e0b"
+                font-size="7"
+                font-family="Inter"
+                font-weight="700"
+              >
+                70:30
+              </text>
+
+              <!-- C5 - Pretrain+FT (teal) -->
+              <rect
+                x="266"
+                y="34"
+                width="36"
+                height="111"
+                rx="3"
+                fill="url(#gradC5)"
+                opacity="0.9"
+              />
+              <text
+                x="284"
+                y="29"
+                text-anchor="middle"
+                fill="#2dd4bf"
+                font-size="9"
+                font-family="Inter"
+                font-weight="700"
+              >
+                0.659
+              </text>
+              <text
+                x="284"
+                y="158"
+                text-anchor="middle"
+                fill="#7da9cc"
+                font-size="8.5"
+                font-family="Inter"
+              >
+                C5
+              </text>
+              <text
+                x="284"
+                y="168"
+                text-anchor="middle"
+                fill="#7da9cc"
+                font-size="7"
+                font-family="Inter"
+              >
+                Pretrain
+              </text>
+
+              <!-- Baseline reference line -->
+              <line
+                x1="40"
+                y1="45"
+                x2="310"
+                y2="45"
+                stroke="#60a5fa"
+                stroke-width="1"
+                stroke-dasharray="4,3"
+                opacity="0.5"
+              />
+              <text
+                x="43"
+                y="42"
+                fill="#60a5fa"
+                font-size="7"
+                font-family="Inter"
+                opacity="0.8"
+              >
+                Baseline
+              </text>
+
+              <!-- Gradients -->
+              <defs>
+                <linearGradient id="gradC1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3b82f6" />
+                  <stop offset="100%" stop-color="#1d4ed8" />
+                </linearGradient>
+                <linearGradient id="gradC2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#6b7280" />
+                  <stop offset="100%" stop-color="#374151" />
+                </linearGradient>
+                <linearGradient id="gradC3" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#8b5cf6" />
+                  <stop offset="100%" stop-color="#5b21b6" />
+                </linearGradient>
+                <linearGradient id="gradC4" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#fbbf24" />
+                  <stop offset="100%" stop-color="#d97706" />
+                </linearGradient>
+                <linearGradient id="gradC5" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2dd4bf" />
+                  <stop offset="100%" stop-color="#0d9488" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <div
+              style="
+                text-align: center;
+                font-size: 10px;
+                color: var(--text-sub);
+                margin-top: -8px;
+              "
+            >
+              mAP@0.5 — Real Validation Set (441 images)
+            </div>
+          </div>
+
+          <!-- Results Table -->
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Condition</th>
+                <th>mAP50</th>
+                <th>mAP50-95</th>
+                <th>vs Baseline</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Real-Only (C1)</td>
+                <td>0.591</td>
+                <td>0.375</td>
+                <td>— baseline</td>
+              </tr>
+              <tr>
+                <td>Synth-Only (C2)</td>
+                <td>0.220</td>
+                <td>0.106</td>
+                <td class="neg">−62.8%</td>
+              </tr>
+              <tr>
+                <td>50/50 Mix (C3)</td>
+                <td>0.652</td>
+                <td>0.420</td>
+                <td class="pos">+10.3%</td>
+              </tr>
+              <tr class="winner">
+                <td>★ 70:30 Mix (C4)</td>
+                <td>0.666</td>
+                <td>0.429</td>
+                <td>+12.7%</td>
+              </tr>
+              <tr>
+                <td>Pretrain+FT (C5)</td>
+                <td>0.659</td>
+                <td>0.423</td>
+                <td class="pos">+11.5%</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Key Finding -->
+          <div class="finding-box">
+            <div class="finding-label">★ Key Finding</div>
+            <div class="finding-text">
+              The <strong>70:30 real-dominated strategy</strong> achieves the
+              highest mAP50 (0.666, <strong>+12.7%</strong>) with simultaneous
+              gains in both Precision (+6.8%) and Recall (+9.8%) — indicating an
+              <strong>upward shift of the PR curve</strong>, not merely a
+              threshold adjustment. This is the first controlled evidence of
+              this pattern in an anchor-free YOLOv8n architecture.
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /main-grid -->
+
+      <!-- ===== FOOTER ===== -->
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-heading">
+            <span class="icon">🎓</span> Conclusions
+          </div>
+          <ul class="footer-bullets">
+            <li class="positive">
+              Three of five strategies outperform the real-only baseline when
+              trained to full convergence
+            </li>
+            <li class="positive">
+              70:30 mixing is the most effective data-level strategy; synthetic
+              pretraining achieves comparable mAP50 via a different mechanism
+            </li>
+            <li class="negative">
+              Synthetic-only training is unusable (mAP50 = 0.220, FN rate = 92%)
+              — domain gap requires real-data grounding
+            </li>
+            <li>
+              The integration method, not synthetic data alone, determines the
+              magnitude of gain
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-heading">
+            <span class="icon">🌍</span> Societal Impact
+          </div>
+          <ul class="footer-bullets">
+            <li>
+              Improved pedestrian detection under occlusion and scale variation
+              contributes directly to AV and ADAS safety
+            </li>
+            <li>
+              Synthetic augmentation reduces dependence on expensive,
+              privacy-sensitive real-world recording
+            </li>
+            <li>
+              CPU-feasible methodology demonstrates that safety-critical AI
+              research is accessible beyond GPU-scale infrastructure
+            </li>
+            <li
+              style="color: var(--text-sub); font-size: 10.5px; padding-left: 0"
+            >
+              Results are comparative evidence only — not a basis for deployment
+              without further safety validation (ISO 26262 / ISO 21448)
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-heading">
+            <span class="icon">🔭</span> Future Work
+          </div>
+          <ul class="footer-bullets">
+            <li>
+              Apply GAN-based or diffusion style transfer to reduce the
+              synthetic-to-real texture gap without architecture changes
+            </li>
+            <li>
+              Scale to larger YOLOv8 variants (s, m, l) and GPU-based training
+              with expanded real-world corpora
+            </li>
+            <li>
+              Investigate panoramic-specific distortion handling for 360° camera
+              deployments using SYNTHIA-PANO
+            </li>
+          </ul>
+          <div
+            style="
+              margin-top: 14px;
+              padding-top: 10px;
+              border-top: 1px solid var(--border);
+            "
+          >
+            <div
+              style="font-size: 9px; color: var(--text-sub); line-height: 1.6"
+            >
+              <strong style="color: var(--cyan)">Key references:</strong> Ros et
+              al. (2016) SYNTHIA · Fabbri et al. (2021) MOTSynth · Marin et al.
+              (2010) ViPeD · Sacco et al. (2022) MetaPed · Khalzaa et al. (2023)
+              YOLOv7 synthetic mixing · Tobin et al. (2017) Domain Randomisation
+              · Ultralytics YOLOv8
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /footer-grid -->
+    </div>
+    <!-- /poster -->
+  </body>
+</html>

@@ -1,0 +1,10 @@
+# Example YOLO data config for the generated 50/50 mixed dataset.
+# Dataset composition: 2,500 real images + 2,500 synthetic images.
+# Validation remains the fixed real validation split.
+
+path: /Users/YOUR_USERNAME/Downloads/real_synth_5050
+train: images/train
+val: images/val
+
+names:
+  0: pedestrian

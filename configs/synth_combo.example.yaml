@@ -1,0 +1,9 @@
+# Example YOLO data config for the merged SYNTHIA-PANO + CARLA synthetic dataset.
+# In the original experiment, this was used for synthetic-only training.
+
+path: /Users/YOUR_USERNAME/Downloads/synth_combo
+train: images/train
+val: images/val
+
+names:
+  0: pedestrian

@@ -1,0 +1,9 @@
+# Example YOLO data config for the real-only CityPersons/Cityscapes-derived dataset.
+# Copy to your local dataset folder as data.yaml and update the path.
+
+path: /Users/YOUR_USERNAME/Downloads/yolo_dir_ped
+train: images/train
+val: images/val
+
+names:
+  0: pedestrian

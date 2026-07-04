@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Notebooks / local scratch
+.ipynb_checkpoints/
+*.log
+.DS_Store
+
+# Large ML artefacts
+runs/
+weights/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.tflite
+*.pb
+*.ckpt
+
+# Local datasets - do not commit licensed datasets
+data/
+datasets/
+yolo_dir_ped/
+synth_combo/
+real_synth_5050/
+real_plus_syn30/
+images/train/
+labels/train/
+images/val/
+labels/val/
+
+# Ultralytics outputs
+train*/
+val*/
+predict*/

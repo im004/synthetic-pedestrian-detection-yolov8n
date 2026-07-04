@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "Synthetic-to-Real Pedestrian Detection with YOLOv8n"
+authors:
+  - family-names: "Mohamed"
+    given-names: "Imran"
+year: 2026
+date-released: "2026-04-01"
+repository-code: "https://github.com/im004/synthetic-pedestrian-detection-yolov8n"
+abstract: "A final-year engineering research project evaluating synthetic-to-real pedestrian detection transfer using YOLOv8n across five controlled training strategies."
+keywords:
+  - pedestrian detection
+  - synthetic data
+  - YOLOv8
+  - computer vision
+  - autonomous vehicles
+  - synthetic-to-real transfer
+license: MIT

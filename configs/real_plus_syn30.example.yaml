@@ -1,0 +1,10 @@
+# Example YOLO data config for the generated 70:30 real-dominated dataset.
+# Dataset composition: all 2,500 real images + 750 synthetic images.
+# Validation remains the fixed real validation split.
+
+path: /Users/YOUR_USERNAME/Downloads/real_plus_syn30
+train: images/train
+val: images/val
+
+names:
+  0: pedestrian

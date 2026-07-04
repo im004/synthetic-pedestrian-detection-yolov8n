@@ -1,0 +1,6 @@
+condition_id,condition,training_strategy,precision_boxp,recall,map50,map50_95,relative_map50_vs_baseline,notes
+C1,Real-only baseline,YOLOv8n trained on 2500 real images,0.693,0.513,0.591,0.375,0.0%,Baseline real-domain model
+C2,Synthetic-only,"YOLOv8n trained on SYNTHIA-PANO + CARLA synthetic images, evaluated on real validation split",0.227,0.241,0.22,0.106,-62.8%,Demonstrates severe synthetic-to-real domain gap
+C3,50/50 mixed,2500 real + 2500 synthetic images,0.745,0.549,0.652,0.42,+10.3%,Improves over real-only baseline
+C4,70:30 real-dominated mixed,2500 real + 750 synthetic images,0.74,0.563,0.666,0.429,+12.7%,"Best overall mAP50, mAP50-95 and recall"
+C5,Synthetic pretrain -> real fine-tune,50 epochs synthetic pretraining followed by 50 epochs real fine-tuning,0.751,0.558,0.659,0.423,+11.5%,Highest precision

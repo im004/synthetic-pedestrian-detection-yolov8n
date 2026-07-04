@@ -1,0 +1,16 @@
+# Original project environment notes:
+# - Python 3.9.6
+# - Ultralytics 8.3.249
+# - PyTorch 2.8.0 CPU
+# - Apple M2 CPU-only training
+
+ultralytics==8.3.249
+torch==2.8.0
+torchvision
+numpy
+pandas
+matplotlib
+opencv-python
+PyYAML
+Pillow
+tqdm
